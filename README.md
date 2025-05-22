@@ -71,7 +71,9 @@ sudo ./ssh_welcome_banner.sh
 
 ## 📜 License
 
-MIT License © [xneo1](https://github.com/xneo1)
+Apache License 2.0 © [xneo1](https://github.com/xneo1)  
+See the [LICENSE](LICENSE) file for details.
+
 
 ---
 
