@@ -7,7 +7,7 @@ Welcome to **Linux Banner Script (LBS)** — a simple but powerful tool to add a
 ## 📸 Preview
 
 ```bash
-LLMind
+LocalAI
   📘  Coolify with Ollama, OpenWebUI and LiteLLM
 
   🖥️  OS: Ubuntu 24.04.2 LTS - Version: 24.04
