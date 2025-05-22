@@ -26,6 +26,12 @@ fi
 # Prompt for custom title and description
 read -rp "Enter title for this container/VM: " TITLE
 read -rp "Enter a short description: " DESCRIPTION
+read -rp "Enter Proxmox VM/LXC ID (optional): " VMID
+
+# Append ID to title if provided
+if [[ -n "$VMID" ]]; then
+  TITLE+=" | $VMID"
+fi
 
 # Colors
 GREEN='\033[0;32m'
