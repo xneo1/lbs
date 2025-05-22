@@ -6,13 +6,15 @@ Welcome to **Linux Banner Script (LBS)** — a simple but powerful tool to add a
 
 ## 📸 Preview
 
+![Demo](demo/demo.gif)
+
 ```bash
-LLMind
+LocalAI
   📘  Coolify with Ollama, OpenWebUI and LiteLLM
 
   🖥️  OS: Ubuntu 24.04.2 LTS - Version: 24.04
-  🏷️  Hostname: llmind
-  🌐  IP Address: 192.168.0.70
+  🏷️  Hostname: localai
+  🌐  IP Address: 192.168.0.100
 
   ⏱️  Uptime: up 18 hours, 11 minutes
   🧠  CPU Load: 7.1%
@@ -41,7 +43,7 @@ bash <(curl -s https://raw.githubusercontent.com/xneo1/lbs/refs/heads/main/ssh_w
 ```
 
 You’ll be prompted to:
-- Enter a **title** (e.g., "LLMind")
+- Enter a **title** (e.g., "LocalAI")
 - Enter a **description** (e.g., "Coolify with Ollama, OpenWebUI and LiteLLM")
 - Confirm overwrite if an existing banner is detected
 
