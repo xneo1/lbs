@@ -7,26 +7,26 @@ Welcome to **Linux Banner Script (LBS)** — a simple but powerful tool to add a
 ## 📸 Preview
 
 ```bash
-Homepage LXC Container
-  📘  Hosts the Homepage dashboard
+LLMind
+  📘  Coolify with Ollama, OpenWebUI and LiteLLM
 
-  🖥️  OS: Debian GNU/Linux - Version: 12
-  🏷️  Hostname: homepage
-  🌐  IP Address: 192.168.0.77
+  🖥️  OS: Ubuntu 24.04.2 LTS - Version: 24.04
+  🏷️  Hostname: llmind
+  🌐  IP Address: 192.168.0.70
 
-  ⏱️  Uptime: up 3 days, 6 hours
-  🧠  CPU Load: 12.5%
-  🗄️  RAM Usage: 682MB / 2048MB (33.3%)
-  💾  Disk Usage: 5.6G / 30G (18%)
+  ⏱️  Uptime: up 18 hours, 11 minutes
+  🧠  CPU Load: 7.1%
+  🗄️  RAM Usage: 2404MB / 32095MB (7.5%)
+  💾  Disk Usage: 42G / 293G (15%)
 ```
 
 ---
 
 ## 🚀 Features
 
+- Prompts for custom title and description on install
 - Dynamic system info (OS, Hostname, IP)
 - Uptime, CPU Load, Memory & Disk Usage
-- Custom title and description per VM/LXC
 - Auto-installed to `/etc/profile.d/banner.sh`
 - No dependencies — pure Bash
 
@@ -39,8 +39,8 @@ bash <(curl -s https://raw.githubusercontent.com/xneo1/lbs/refs/heads/main/ssh_w
 ```
 
 You’ll be prompted to:
-- Enter a title (e.g., "Uptime Kuma VM")
-- Enter a description (e.g., "Monitors uptime of all services")
+- Enter a **title** (e.g., "LLMind")
+- Enter a **description** (e.g., "Coolify with Ollama, OpenWebUI and LiteLLM")
 
 Then, the script:
 - Detects OS, Hostname, IP
@@ -73,7 +73,6 @@ sudo ./ssh_welcome_banner.sh
 
 Apache License 2.0 © [xneo1](https://github.com/xneo1)  
 See the [LICENSE](LICENSE) file for details.
-
 
 ---
 
