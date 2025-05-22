@@ -1,10 +1,22 @@
 #!/bin/bash
 
-BANNER_FILE="/etc/profile.d/banner.sh"
+# Directory where banners are typically placed
+PROFILE_DIR="/etc/profile.d"
+BANNER_FILE="$PROFILE_DIR/banner.sh"
 
-# Check for existing banner and ask if we should overwrite
-if [ -f "$BANNER_FILE" ]; then
-  read -rp "A banner already exists. Do you want to update it? (y/n): " CONFIRM
+# Detect existing community-scripts banners
+EXISTING_COMMUNITY_BANNER=$(grep -l "community-scripts" $PROFILE_DIR/*.sh 2>/dev/null | head -n 1)
+
+if [[ -n "$EXISTING_COMMUNITY_BANNER" ]]; then
+  echo "⚠️  An existing Proxmox community-scripts banner was found: $EXISTING_COMMUNITY_BANNER"
+  read -rp "Do you want to overwrite and update it with your custom banner? (y/n): " CONFIRM
+  if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+    echo "Aborted. Community banner retained."
+    exit 0
+  fi
+  BANNER_FILE="$EXISTING_COMMUNITY_BANNER"
+elif [ -f "$BANNER_FILE" ]; then
+  read -rp "A banner already exists at $BANNER_FILE. Overwrite? (y/n): " CONFIRM
   if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
     echo "Aborted. Existing banner retained."
     exit 0
@@ -37,9 +49,9 @@ MEMORY=$(free -m | awk '/Mem:/ {printf "%dMB / %dMB (%.1f%%)", $3, $2, $3*100/$2
 DISK_USED=$(df -h / | awk 'NR==2 {print $3}')
 DISK_TOTAL=$(df -h / | awk 'NR==2 {print $2}')
 DISK_PERCENT=$(df / | awk 'NR==2 {gsub("%", "", $5); print $5}')
-DISK_BAR=""
+DISK_COLOR="$GREEN"
+WARNING=""
 
-# Color based on usage
 if (( DISK_PERCENT >= 95 )); then
   DISK_COLOR="$RED$BLINK"
   WARNING="${RED}${BLINK}⚠ WARNING: Low Disk Space! ⚠${NC}"
@@ -47,13 +59,13 @@ elif (( DISK_PERCENT >= 80 )); then
   DISK_COLOR="$MAGENTA"
 elif (( DISK_PERCENT >= 60 )); then
   DISK_COLOR="$YELLOW"
-else
-  DISK_COLOR="$GREEN"
 fi
 
 # Write banner
 sudo tee "$BANNER_FILE" > /dev/null <<EOF
 #!/bin/bash
+
+# Github: https://github.com/community-scripts/ProxmoxVE
 
 echo -e "\n${CYAN}$TITLE${NC}"
 echo -e "${YELLOW}  📘  $DESCRIPTION${NC}"
