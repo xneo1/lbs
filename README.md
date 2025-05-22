@@ -7,12 +7,12 @@ Welcome to **Linux Banner Script (LBS)** — a simple but powerful tool to add a
 ## 📸 Preview
 
 ```bash
-LocalAI
+LLMind
   📘  Coolify with Ollama, OpenWebUI and LiteLLM
 
   🖥️  OS: Ubuntu 24.04.2 LTS - Version: 24.04
-  🏷️  Hostname: localai
-  🌐  IP Address: 192.168.0.100
+  🏷️  Hostname: llmind
+  🌐  IP Address: 192.168.0.70
 
   ⏱️  Uptime: up 18 hours, 11 minutes
   🧠  CPU Load: 7.1%
@@ -25,8 +25,10 @@ LocalAI
 ## 🚀 Features
 
 - Prompts for custom title and description on install
+- Detects and optionally updates existing banners
 - Dynamic system info (OS, Hostname, IP)
 - Uptime, CPU Load, Memory & Disk Usage
+- Colored Disk Usage levels with warning for >95% usage
 - Auto-installed to `/etc/profile.d/banner.sh`
 - No dependencies — pure Bash
 
@@ -41,10 +43,16 @@ bash <(curl -s https://raw.githubusercontent.com/xneo1/lbs/refs/heads/main/ssh_w
 You’ll be prompted to:
 - Enter a **title** (e.g., "LLMind")
 - Enter a **description** (e.g., "Coolify with Ollama, OpenWebUI and LiteLLM")
+- Confirm overwrite if an existing banner is detected
 
 Then, the script:
 - Detects OS, Hostname, IP
 - Collects CPU, RAM, Disk, and uptime info
+- Assigns disk usage color indicators:
+  - Green: <60%
+  - Yellow: 60–79%
+  - Magenta: 80–94%
+  - Red (with ⚠ blinking warning): 95% and above
 - Writes the banner to `/etc/profile.d/banner.sh`
 
 Just log out and SSH back in to see the result. ✅
