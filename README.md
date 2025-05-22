@@ -1,4 +1,4 @@
-# 🐧 Linux Banner Script (LBS)
+# 🐧 Linux Banner Script (LBS) - Version 2.0
 
 Welcome to **Linux Banner Script (LBS)** — a simple but powerful tool to add a stylish and informative welcome banner to your Linux VMs and LXCs when connecting via SSH. Perfect for homelabbers, sysadmins, and terminal enthusiasts who want system status at a glance every time they log in.
 
@@ -9,7 +9,7 @@ Welcome to **Linux Banner Script (LBS)** — a simple but powerful tool to add a
 ![Demo](demo/demo.gif)
 
 ```bash
-LocalAI
+LocalAI | 100
   📘  Coolify with Ollama, OpenWebUI and LiteLLM
 
   🖥️  OS: Ubuntu 24.04.2 LTS - Version: 24.04
@@ -26,13 +26,17 @@ LocalAI
 
 ## 🚀 Features
 
-- Prompts for custom title and description on install
-- Detects and optionally updates existing banners
-- Dynamic system info (OS, Hostname, IP)
-- Uptime, CPU Load, Memory & Disk Usage
-- Colored Disk Usage levels with warning for >95% usage
-- Auto-installed to `/etc/profile.d/banner.sh`
-- No dependencies — pure Bash
+- Prompts for custom title, description, and optional Proxmox VM/LXC ID
+- Automatically appends the ID to the banner title (e.g. `LocalAI | 100`)
+- Detects and optionally updates existing community-scripts banners
+- Dynamic system info: OS, Hostname, IP, Uptime, CPU, RAM, Disk
+- Disk usage color-coded:
+  - Green: <60%
+  - Yellow: 60–79%
+  - Magenta: 80–94%
+  - Red (with ⚠ blinking warning): 95% and above
+- Fully Bash-based — no external dependencies
+- Auto-installs to `/etc/profile.d/banner.sh` or updates existing banner
 
 ---
 
@@ -42,22 +46,14 @@ LocalAI
 bash <(curl -s https://raw.githubusercontent.com/xneo1/lbs/refs/heads/main/ssh_welcome_banner.sh)
 ```
 
-You’ll be prompted to:
-- Enter a **title** (e.g., "LocalAI")
-- Enter a **description** (e.g., "Coolify with Ollama, OpenWebUI and LiteLLM")
-- Confirm overwrite if an existing banner is detected
+### You will be prompted to:
+- Enter a **Title** (e.g., "LocalAI")
+- Enter a **Description** (e.g., "Coolify with Ollama, OpenWebUI and LiteLLM")
+- Optionally provide a **Proxmox VM/LXC ID** (e.g., 100)
 
-Then, the script:
-- Detects OS, Hostname, IP
-- Collects CPU, RAM, Disk, and uptime info
-- Assigns disk usage color indicators:
-  - Green: <60%
-  - Yellow: 60–79%
-  - Magenta: 80–94%
-  - Red (with ⚠ blinking warning): 95% and above
-- Writes the banner to `/etc/profile.d/banner.sh`
+If an existing community-script or banner is found, you will be asked whether to overwrite it.
 
-Just log out and SSH back in to see the result. ✅
+Just log out and SSH back in to see your banner! ✅
 
 ---
 
@@ -73,9 +69,16 @@ sudo ./ssh_welcome_banner.sh
 
 ## 🤖 Use Cases
 
-- Homelab monitoring VMs (e.g., Grafana, Uptime Kuma)
-- Docker hosts, Pi clusters, or remote servers
-- Anyone who wants a clean and informative SSH login screen
+- Homelab VMs and LXCs (e.g., Grafana, Uptime Kuma, LocalAI)
+- Docker hosts, Proxmox-managed environments, Raspberry Pi clusters
+- Clean visual overview on every SSH login
+
+---
+
+## 🗓 Version
+
+- **Current Version:** 2.0
+- **Last Updated:** 22/05/2025
 
 ---
 
