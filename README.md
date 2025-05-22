@@ -11,8 +11,8 @@ LLMind
   📘  Coolify with Ollama, OpenWebUI and LiteLLM
 
   🖥️  OS: Ubuntu 24.04.2 LTS - Version: 24.04
-  🏷️  Hostname: llmind
-  🌐  IP Address: 192.168.0.70
+  🏷️  Hostname: localai
+  🌐  IP Address: 192.168.0.100
 
   ⏱️  Uptime: up 18 hours, 11 minutes
   🧠  CPU Load: 7.1%
