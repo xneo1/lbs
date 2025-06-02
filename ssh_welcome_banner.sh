@@ -28,6 +28,39 @@ read -rp "Enter title for this container/VM: " TITLE
 read -rp "Enter a short description: " DESCRIPTION
 read -rp "Enter Proxmox VM/LXC ID (optional): " VMID
 
+# Prompt for startup path
+echo ""
+echo "📁 Startup Path Configuration"
+echo "   You can set a default directory that users will be placed in after SSH login."
+echo "   This is useful for applications where you want users to start in the app directory."
+echo ""
+read -rp "Enter startup path (leave empty to use default home directory): " STARTUP_PATH
+
+# Validate startup path if provided
+if [[ -n "$STARTUP_PATH" ]]; then
+  # Expand tilde and resolve path
+  STARTUP_PATH=$(eval echo "$STARTUP_PATH")
+  
+  if [[ ! -d "$STARTUP_PATH" ]]; then
+    echo "⚠️  Warning: Directory '$STARTUP_PATH' does not exist."
+    read -rp "Do you want to create it? (y/n): " CREATE_DIR
+    if [[ "$CREATE_DIR" =~ ^[Yy]$ ]]; then
+      sudo mkdir -p "$STARTUP_PATH"
+      if [[ $? -eq 0 ]]; then
+        echo "✅ Directory created: $STARTUP_PATH"
+      else
+        echo "❌ Failed to create directory. Using default home directory instead."
+        STARTUP_PATH=""
+      fi
+    else
+      echo "Using default home directory instead."
+      STARTUP_PATH=""
+    fi
+  else
+    echo "✅ Startup path verified: $STARTUP_PATH"
+  fi
+fi
+
 # Append ID to title if provided
 if [[ -n "$VMID" ]]; then
   TITLE+=" | $VMID"
@@ -91,5 +124,25 @@ if (( DISK_PERCENT >= 95 )); then
   echo -e "echo -e \"$WARNING\"" | sudo tee -a "$BANNER_FILE" > /dev/null
 fi
 
+# Add startup path change if specified
+if [[ -n "$STARTUP_PATH" ]]; then
+  cat << EOF | sudo tee -a "$BANNER_FILE" > /dev/null
+
+# Change to startup directory for interactive sessions
+if [[ \$- == *i* ]] && [[ -d "$STARTUP_PATH" ]]; then
+    echo -e "  📁  Starting in: ${GREEN}$STARTUP_PATH${NC}"
+    cd "$STARTUP_PATH"
+fi
+EOF
+  echo ""
+  echo "📁 Startup path configured: $STARTUP_PATH"
+fi
+
 sudo chmod +x "$BANNER_FILE"
-echo -e "\n✅ Banner installed to: $BANNER_FILE\nLog out and SSH back in to see it."
+
+echo ""
+echo "✅ Enhanced banner installed to: $BANNER_FILE"
+if [[ -n "$STARTUP_PATH" ]]; then
+  echo "🚀 Users will automatically be placed in: $STARTUP_PATH"
+fi
+echo "💡 Log out and SSH back in to see the banner and test the startup path."
